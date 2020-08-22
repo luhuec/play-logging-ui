@@ -1,3 +1,3 @@
 # play-logging-ui
 
-![alt text][screenshot.png]
+![alt text](screenshot.png)
