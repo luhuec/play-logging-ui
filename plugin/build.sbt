@@ -1,5 +1,5 @@
 name := "play-logging-ui"
-organization := "foo.luhuec"
+organization := "de.luhuec"
 version := "1.0-SNAPSHOT"
 
 lazy val root =

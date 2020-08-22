@@ -15,10 +15,17 @@
   let allLoggers: Array<LoggerModel> = [];
   let loggers: Array<LoggerModel> = [];
 
+  let query = undefined;
+
   const init = () => {
     loading = getLoggers(basepath).then((l) => {
       allLoggers = l;
-      loggerStore.set(l);
+
+      if (query.length > 0) {
+        loggerStore.set(filterLoggers(l, query));
+      } else {
+        loggerStore.set(l);
+      }
     });
   };
 
@@ -26,13 +33,21 @@
     loggers = l;
   });
 
-  queryStore.subscribe((query) => {
-    loggers = filterLoggers(allLoggers, query);
+  queryStore.subscribe((q) => {
+    query = q;
+
+    if (q.length > 0) {
+      loggers = filterLoggers(allLoggers, q);
+    } else {
+      loggers = allLoggers
+    }
   });
 
   const onUpdateLogLevel = (e) => {
     const event: UpdateLogLevelEvent = e.detail;
-    updateLogLevel(basepath, event.logger.name, event.level).then((r) => init());
+    updateLogLevel(basepath, event.logger.name, event.level).then((r) =>
+      init()
+    );
   };
 
   init();
@@ -57,7 +72,7 @@
 
   <Header />
 
-  {#each loggers as logger}
+  {#each loggers as logger (logger.name)}
     <Logger on:update-log-level={onUpdateLogLevel} {logger} depth={0} />
   {/each}
 </div>

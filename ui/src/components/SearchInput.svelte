@@ -9,13 +9,13 @@
 <style lang="scss">
   input {
     background-color: #ffffff00;
-    color: #ffffff;
-    border: 2px solid lighten(#2c3e50, 30%);
+    color: #ecf0f1;
+    border: 2px solid #ecf0f1;
     border-radius: 5px;
     padding: 10px 10px;
 
     &::placeholder {
-      color: #ffffff;
+      color: #ecf0f1;
       opacity: 0.5;
     }
   }

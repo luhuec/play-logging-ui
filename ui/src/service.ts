@@ -18,16 +18,25 @@ export function getLoggers(basepath: string): Promise<Array<LoggerModel>> {
     })
 }
 
-function filterLogger(logger: LoggerModel, query: string): boolean {
-    if (logger.name.includes(query)) {
-        return true;
+
+function mapLogger(logger: LoggerModel, query: string): LoggerModel {
+    if (logger.name.toLowerCase().includes(query.toLocaleLowerCase())) {
+        return logger;
     } else {
-        return logger.children.filter(child => filterLogger(child, query)).length > 0;
+        if (logger.children.length > 0) {
+            const children = logger.children.map(child => mapLogger(child, query)).filter(c => c != undefined);
+
+            if (children.length == 0) {
+                return undefined;
+            } else {
+                return new LoggerModel(logger.name, logger.level, children);
+            }
+        } else {
+            return undefined;
+        }
     }
 }
 
 export function filterLoggers(loggers: Array<LoggerModel>, query: string): Array<LoggerModel> {
-    return loggers.filter(logger => {
-        return filterLogger(logger, query)
-    });
+    return loggers.map(logger => mapLogger(logger, query)).filter(c => c != undefined);
 }

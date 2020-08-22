@@ -11,7 +11,7 @@ module.exports = {
         mainFields: ['svelte', 'module', 'main']
     },
     output: {
-        filename: 'main.js',
+        filename: 'main.[hash].js',
         path: path.resolve(__dirname, 'dist')
     },
     module: {

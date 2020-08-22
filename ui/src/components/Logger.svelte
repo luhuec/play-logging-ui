@@ -5,6 +5,16 @@
   import { children } from "svelte/internal";
   import { queryStore } from "../stores";
 
+  class NamePart {
+    value: string;
+    highlight: boolean;
+
+    constructor(value: string, highlight: boolean) {
+      this.value = value;
+      this.highlight = highlight;
+    }
+  }
+
   export class UpdateLogLevelEvent {
     logger: LoggerModel;
     level: string;
@@ -15,16 +25,43 @@
     }
   }
 
-  let query: string = undefined;
-
   export let depth: number;
   export let logger: LoggerModel;
+  let nameparts = [new NamePart(logger.name, false)];
 
-  if (logger.name == "play" || logger.name == "play.core") {
-    console.log(logger)
-  }
+  queryStore.subscribe((q) => {
+    if (q.length > 0) {
+      const parts = [];
 
-  queryStore.subscribe((q) => (query = q));
+      let p = 0;
+      let index = -1;
+      while (
+        (index = logger.name
+          .toLocaleLowerCase()
+          .indexOf(q.toLocaleLowerCase(), index + 1)) >= 0
+      ) {
+        if (p < index) {
+          parts.push(new NamePart(logger.name.slice(p, index), false));
+        }
+
+        parts.push(
+          new NamePart(logger.name.slice(index, index + q.length), true)
+        );
+
+        p = index + q.length;
+      }
+
+      if (p < logger.name.length) {
+        parts.push(
+          new NamePart(logger.name.slice(p, logger.name.length), false)
+        );
+      }
+
+      nameparts = parts;
+    } else {
+      nameparts = [new NamePart(logger.name, false)];
+    }
+  });
 
   const dispatch = createEventDispatcher();
 </script>
@@ -48,6 +85,12 @@
       &:hover {
         background-color: #f6f6f6;
       }
+
+      .name {
+        .highlight {
+          background-color: lighten(#fbc687, 10%);
+        }
+      }
     }
 
     .children {
@@ -61,7 +104,9 @@
 <div class="logger" class:main={depth == 0}>
   <div class="info" style="margin-left: {depth * 20}px">
     <span class="name">
-      {#if query}{logger.name}{:else}{logger.name}{/if}
+      {#each nameparts as part (part.value)}
+        <span class:highlight={part.highlight}>{part.value}</span>
+      {/each}
     </span>
     <div class="levels">
       <LoggerLevels
@@ -71,7 +116,7 @@
   </div>
 
   <div class="children">
-    {#each logger.children as child}
+    {#each logger.children as child (child.name)}
       <svelte:self on:update-log-level logger={child} depth={depth + 1} />
     {/each}
   </div>
