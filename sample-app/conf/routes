@@ -1,0 +1,5 @@
+->     /                playloggingui.Routes
+
+GET    /                controllers.HomeController.index
+
+GET    /assets/*file    controllers.Assets.at(file)

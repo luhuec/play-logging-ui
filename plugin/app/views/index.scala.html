@@ -1,0 +1,19 @@
+@(basepath: String)
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Play Logging UI</title>
+    <style>
+       @@font-face {
+         font-family: "Fira Sans";
+         src: url("@routes.Assets.at("FiraSans-Regular.ttf")");
+       }
+    </style>
+    <script>window.playloggingui_basepath = "@basepath"</script>
+    <script src="@routes.Assets.at("main.js")"></script>
+</head>
+<body>
+<div id="app"></div>
+</body>
+</html>

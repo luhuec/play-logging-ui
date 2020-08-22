@@ -1,0 +1,6 @@
+.idea
+.asset-cache
+dist
+node_modules
+.sass-cache
+target

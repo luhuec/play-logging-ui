@@ -1,0 +1,30 @@
+{
+  "name": "ui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack-dev-server --hot"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "css-loader": "^4.2.1",
+    "html-webpack-plugin": "^4.3.0",
+    "node-sass": "^4.14.1",
+    "style-loader": "^1.2.1",
+    "svelte": "^3.24.1",
+    "svelte-check": "^1.0.9",
+    "svelte-loader": "2.13.6",
+    "svelte-preprocess": "^4.1.1",
+    "svelte-preprocess-sass": "^0.2.0",
+    "ts-loader": "^8.0.2",
+    "typescript": "^3.9.7",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}

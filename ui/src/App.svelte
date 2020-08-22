@@ -1,0 +1,63 @@
+<script lang="ts">
+  import { getLoggers, LoggerModel, filterLoggers } from "./service";
+  import Logger from "./components/Logger.svelte";
+  import { UpdateLogLevelEvent } from "./components/Logger.svelte";
+  import { loggerStore, queryStore } from "./stores";
+  import { updateLogLevel, resetLevels } from "./api";
+  import Loader from "./components/Loader.svelte";
+  import { fade } from "svelte/transition";
+  import Header from "./components/Header.svelte";
+
+  export let basepath: string;
+
+  let loading = undefined;
+
+  let allLoggers: Array<LoggerModel> = [];
+  let loggers: Array<LoggerModel> = [];
+
+  const init = () => {
+    loading = getLoggers(basepath).then((l) => {
+      allLoggers = l;
+      loggerStore.set(l);
+    });
+  };
+
+  loggerStore.subscribe((l) => {
+    loggers = l;
+  });
+
+  queryStore.subscribe((query) => {
+    loggers = filterLoggers(allLoggers, query);
+  });
+
+  const onUpdateLogLevel = (e) => {
+    const event: UpdateLogLevelEvent = e.detail;
+    updateLogLevel(basepath, event.logger.name, event.level).then((r) => init());
+  };
+
+  init();
+</script>
+
+<style lang="scss">
+  :global(html) {
+    overflow-y: scroll;
+  }
+  :global(body) {
+    margin: 0;
+    font-family: "Fira Sans", "Arial";
+  }
+</style>
+
+<div>
+  {#await loading}
+    <div transition:fade={{ delay: 300, duration: 250 }}>
+      <Loader />
+    </div>
+  {/await}
+
+  <Header />
+
+  {#each loggers as logger}
+    <Logger on:update-log-level={onUpdateLogLevel} {logger} depth={0} />
+  {/each}
+</div>
