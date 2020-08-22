@@ -7,14 +7,14 @@ A play module to update the level of loggers during runtime with a simple ui.
 
 ## Installation
 
-Add `play-logging-ui` to your dependencies in your `build.sbt` file.
+Add `play-logging-ui` to the dependencies in your `build.sbt` file
 ```scala
 libraryDependencies ++= Seq(
   "de.luhuec" %% "play-logging-ui" % "<no-release-yet>"
 )
 ```
 
-Import `playloggingui.Routes` into your `routes` file. 
+Import `playloggingui.Routes` into your `routes` file 
 ```scala
 ->    /         playloggingui.Routes
 ```
