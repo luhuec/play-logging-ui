@@ -95,7 +95,7 @@
 
     .children {
       .info {
-        border-top: 1px solid #dddddd;
+        border-top: 1px solid #e6e6e6;
       }
     }
   }
