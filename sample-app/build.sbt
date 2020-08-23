@@ -8,6 +8,6 @@ resolvers += Resolver.sonatypeRepo("snapshots")
 scalaVersion := "2.12.8"
 
 libraryDependencies ++= Seq(
-  "de.luhuec" %% "play-logging-ui" % "1.0-SNAPSHOT",
+  "com.github.luhuec" % "play-logging-ui" % "0.0.1",
   guice
 )
