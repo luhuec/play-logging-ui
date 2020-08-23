@@ -7,6 +7,7 @@
   import Loader from "./components/Loader.svelte";
   import { fade } from "svelte/transition";
   import Header from "./components/Header.svelte";
+  import Error from "./components/Error.svelte";
 
   export let basepath: string;
 
@@ -39,7 +40,7 @@
     if (q.length > 0) {
       loggers = filterLoggers(allLoggers, q);
     } else {
-      loggers = allLoggers
+      loggers = allLoggers;
     }
   });
 
@@ -70,6 +71,7 @@
     </div>
   {/await}
 
+  <Error />
   <Header />
 
   {#each loggers as logger (logger.name)}

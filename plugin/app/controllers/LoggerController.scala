@@ -3,7 +3,7 @@ package controllers
 import javax.inject.{Inject, Singleton}
 import play.api.libs.json.{Format, Json}
 import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents}
-import service.LoggerService
+import service.{LevelNotFound, LoggerNotFound, LoggerService}
 
 import scala.collection.mutable.ListBuffer
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -27,8 +27,11 @@ class LoggerController @Inject() (cc: ControllerComponents, loggerService: Logge
   def updateLogger(logger: String, level: String): Action[AnyContent] =
     Action.async {
       Future {
-        loggerService.updateLoglevel(logger = logger, level = level)
-        Ok("")
+        loggerService.updateLoglevel(logger = logger, level = level) match {
+          case Right(_)                => NoContent
+          case Left(LoggerNotFound(l)) => BadRequest(s"Logger '$l' not found")
+          case Left(LevelNotFound(l))  => BadRequest(s"Level '$l' not found")
+        }
       }
     }
 

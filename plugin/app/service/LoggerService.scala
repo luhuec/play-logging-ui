@@ -8,6 +8,10 @@ import org.slf4j.LoggerFactory
 import scala.collection.JavaConverters._
 import scala.collection.mutable.ListBuffer
 
+sealed trait Error
+case class LoggerNotFound(logger: String) extends Error
+case class LevelNotFound(level: String)   extends Error
+
 class LoggerRepo {
 
   def get: List[MyLogger] = {
@@ -59,15 +63,26 @@ class LoggerService @Inject() (repo: LoggerRepo) {
     loggers.toList
   }
 
-  def updateLoglevel(logger: String, level: String): Unit = {
+  def updateLoglevel(logger: String, level: String): Either[Error, Unit] = {
     val loggerContext =
       LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
-    loggerContext.getLoggerList.asScala
-      .find(_.getName == logger)
-      .map(l => {
-        l.setLevel(Level.toLevel(level.toUpperCase, Level.INFO))
-        l
-      })
+
+    level.toUpperCase match {
+      case "OFF" | "DEBUG" | "INFO" | "WARN" | "ERROR" =>
+        val result = loggerContext.getLoggerList.asScala
+          .find(_.getName == logger)
+          .map(l => {
+            l.setLevel(Level.toLevel(level.toUpperCase, Level.INFO))
+            l
+          })
+
+        result match {
+          case Some(_) => Right(())
+          case None    => Left(LoggerNotFound(logger))
+        }
+      case _ => Left(LevelNotFound(level))
+    }
+
   }
 
 }
