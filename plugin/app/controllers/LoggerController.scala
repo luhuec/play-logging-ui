@@ -1,15 +1,12 @@
 package controllers
 
 import javax.inject.{Inject, Singleton}
-import play.api.libs.json.{Format, Json}
+import play.api.libs.json.Json
 import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents}
 import service.{LevelNotFound, LoggerNotFound, LoggerService}
 
-import scala.collection.mutable.ListBuffer
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
-
-case class MyLogger(name: String, level: String, children: ListBuffer[MyLogger])
 
 @Singleton
 class LoggerController @Inject() (cc: ControllerComponents, loggerService: LoggerService)
@@ -38,8 +35,7 @@ class LoggerController @Inject() (cc: ControllerComponents, loggerService: Logge
   def loggers: Action[AnyContent] =
     Action.async {
       Future {
-        implicit val format: Format[MyLogger] = Json.format[MyLogger]
-        val loggers                           = loggerService.getLoggers
+        val loggers: List[LoggerResponse] = loggerService.getLoggers.map(LoggerResponse.create)
         Ok(Json.toJson(loggers))
       }
     }
