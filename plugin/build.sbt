@@ -20,7 +20,7 @@ lazy val root =
 libraryDependencies ++= Seq(
   guice % Provided,
   "org.mockito"            %% "mockito-scala"      % "1.14.8" % Test,
-  "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0"  % Test
+  "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.3"  % Test
 )
 
 publishTo := Some(

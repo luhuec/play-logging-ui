@@ -3,15 +3,13 @@ package unit
 import ch.qos.logback.classic
 import ch.qos.logback.classic.Level
 import org.mockito.IdiomaticMockito
-import org.scalatest.EitherValues
-import org.scalatest.matchers.must.Matchers
-import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.{EitherValues, MustMatchers, WordSpec}
 import org.slf4j.LoggerFactory
 import service._
 
 import scala.collection.mutable.ListBuffer
 
-class LoggerServiceSpec extends AnyWordSpec with Matchers with IdiomaticMockito with EitherValues {
+class LoggerServiceSpec extends WordSpec with IdiomaticMockito with EitherValues with MustMatchers {
 
   "LoggerService" must {
 
