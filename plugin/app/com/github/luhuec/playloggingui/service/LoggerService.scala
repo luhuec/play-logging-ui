@@ -80,7 +80,6 @@ class LoggerService @Inject() (repo: LoggerRepo) {
         }
       case _ => Left(LevelNotFound(level))
     }
-
   }
 
 }
