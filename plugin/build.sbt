@@ -7,7 +7,7 @@ scmInfo := Some(
     "https://github.com/luhuec/play-logging-ui.git"
   )
 )
-developers := List(Developer("luhuec", "luhuec", "lh@luhuec.de", url("https://gitlab.com/luhuec")))
+developers := List(Developer("luhuec", "luhuec", "lh@luhuec.de", url("https://github.com/luhuec")))
 licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0"))
 publishMavenStyle := true
 version := "0.0.4-SNAPSHOT"
