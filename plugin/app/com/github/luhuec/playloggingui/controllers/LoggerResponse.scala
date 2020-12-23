@@ -1,7 +1,7 @@
-package controllers
+package com.github.luhuec.playloggingui.controllers
 
+import com.github.luhuec.playloggingui.service.Logger
 import play.api.libs.json.{Json, Writes}
-import service.Logger
 
 case class LoggerResponse(name: String, level: String, children: List[LoggerResponse])
 

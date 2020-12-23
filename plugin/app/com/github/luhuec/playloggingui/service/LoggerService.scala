@@ -1,4 +1,4 @@
-package service
+package com.github.luhuec.playloggingui.service
 
 import ch.qos.logback.classic.{Level, LoggerContext}
 import javax.inject.{Inject, Singleton}

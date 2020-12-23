@@ -1,6 +1,4 @@
-package service
-
-import play.api.libs.json.{Json, Writes}
+package com.github.luhuec.playloggingui.service
 
 import scala.collection.mutable.ListBuffer
 

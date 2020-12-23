@@ -1,7 +1,7 @@
 
-GET      /playloggingui                  controllers.LoggerController.index
+GET      /playloggingui                  com.github.luhuec.playloggingui.controllers.LoggerController.index
 
-GET      /playloggingui/logger           controllers.LoggerController.loggers
-GET      /playloggingui/logger/update    controllers.LoggerController.updateLogger(logger: String, level: String)
+GET      /playloggingui/logger           com.github.luhuec.playloggingui.controllers.LoggerController.loggers
+GET      /playloggingui/logger/update    com.github.luhuec.playloggingui.controllers.LoggerController.updateLogger(logger: String, level: String)
 
 GET      /playloggingui/assets/*file     controllers.Assets.at(path="/public/lib/play-logging-ui", file)

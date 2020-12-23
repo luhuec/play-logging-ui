@@ -1,9 +1,9 @@
-package controllers
+package com.github.luhuec.playloggingui.controllers
 
+import com.github.luhuec.playloggingui.service.{LevelNotFound, LoggerNotFound, LoggerService}
 import javax.inject.{Inject, Singleton}
 import play.api.libs.json.Json
 import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents}
-import service.{LevelNotFound, LoggerNotFound, LoggerService}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -16,7 +16,7 @@ class LoggerController @Inject() (cc: ControllerComponents, loggerService: Logge
     Action.async { request =>
       Future {
         val basepath = request.path.split("/playloggingui").headOption.getOrElse("")
-        Ok(views.html.index(basepath))
+        Ok(com.github.luhuec.playloggingui.views.html.index(basepath))
       }
 
     }

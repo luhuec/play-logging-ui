@@ -10,6 +10,8 @@ class HomeController @Inject() (cc: ControllerComponents)(implicit
 
   def index =
     Action {
-      Ok("Hello")
+      Redirect("/playloggingui")
     }
+
+
 }

@@ -5,7 +5,7 @@ import ch.qos.logback.classic.Level
 import org.mockito.IdiomaticMockito
 import org.scalatest.{EitherValues, MustMatchers, WordSpec}
 import org.slf4j.LoggerFactory
-import service._
+import com.github.luhuec.playloggingui.service._
 
 import scala.collection.mutable.ListBuffer
 
