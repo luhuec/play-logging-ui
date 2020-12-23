@@ -10,7 +10,7 @@ A play module to update the level of loggers during runtime with a simple ui.
 Add `play-logging-ui` to the dependencies in your `build.sbt` file
 ```scala
 libraryDependencies ++= Seq(
-  "com.github.luhuec" % "play-logging-ui" % "0.0.2"
+  "com.github.luhuec" % "play-logging-ui" % "0.0.3"
 )
 ```
 
