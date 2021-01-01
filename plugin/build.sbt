@@ -18,7 +18,8 @@ lazy val root =
   project.in(file(".")).enablePlugins(PlayScala).enablePlugins(SbtTwirl)
 
 libraryDependencies ++= Seq(
-  guice % Provided,
+  "org.typelevel"          %% "cats-core"          % "2.1.1",
+  guice                     % Provided,
   "org.mockito"            %% "mockito-scala"      % "1.14.8" % Test,
   "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.3"  % Test
 )

@@ -24,7 +24,7 @@ class LoggerController @Inject() (cc: ControllerComponents, loggerService: Logge
   def updateLogger(logger: String, level: String): Action[AnyContent] =
     Action.async {
       Future {
-        loggerService.updateLoglevel(logger = logger, level = level) match {
+        loggerService.updateLoglevel(loggerName = logger, levelName = level) match {
           case Right(_)                => NoContent
           case Left(LoggerNotFound(l)) => BadRequest(s"Logger '$l' not found")
           case Left(LevelNotFound(l))  => BadRequest(s"Level '$l' not found")
