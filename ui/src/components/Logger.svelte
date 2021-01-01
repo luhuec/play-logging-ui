@@ -2,7 +2,6 @@
   import { createEventDispatcher } from "svelte";
   import { LoggerModel } from "../service";
   import LoggerLevels from "./LoggerLevels.svelte";
-  import { children } from "svelte/internal";
   import { queryStore } from "../stores";
 
   class NamePart {

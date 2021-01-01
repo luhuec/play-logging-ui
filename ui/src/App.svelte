@@ -3,15 +3,11 @@
   import Logger from "./components/Logger.svelte";
   import { UpdateLogLevelEvent } from "./components/Logger.svelte";
   import { loggerStore, queryStore } from "./stores";
-  import { updateLogLevel, resetLevels } from "./api";
-  import Loader from "./components/Loader.svelte";
-  import { fade } from "svelte/transition";
+  import { updateLogLevel } from "./api";
   import Header from "./components/Header.svelte";
   import Error from "./components/Error.svelte";
 
   export let basepath: string;
-
-  let loading = undefined;
 
   let allLoggers: Array<LoggerModel> = [];
   let loggers: Array<LoggerModel> = [];
@@ -19,7 +15,7 @@
   let query = undefined;
 
   const init = () => {
-    loading = getLoggers(basepath).then((l) => {
+    getLoggers(basepath).then((l) => {
       allLoggers = l;
 
       if (query.length > 0) {
@@ -65,12 +61,6 @@
 </style>
 
 <div>
-  {#await loading}
-    <div transition:fade={{ delay: 300, duration: 250 }}>
-      <Loader />
-    </div>
-  {/await}
-
   <Error />
   <Header />
 

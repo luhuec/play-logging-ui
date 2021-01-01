@@ -8,7 +8,7 @@ class AssetsController @Inject() (cc: ControllerComponents) extends AbstractCont
 
   def js(): Action[AnyContent] =
     Action {
-      Ok.sendResource("assets/main.e6356a2e70d4245effa4.js")
+      Ok.sendResource("assets/main.79db02bbea437624490e.js")
     }
 
 }
