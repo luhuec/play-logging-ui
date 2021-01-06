@@ -1,11 +1,11 @@
-@(basepath: String)
+@(basepath: String, js: Html)
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Play Logging UI</title>
     <script>window.playloggingui_basepath = "@basepath"</script>
-    <script src="@com.github.luhuec.playloggingui.controllers.routes.AssetsController.js()"></script>
+    <script>@js</script>
 </head>
 <body>
 <div id="app"></div>

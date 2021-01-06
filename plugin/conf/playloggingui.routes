@@ -3,5 +3,3 @@ GET      /playloggingui                  com.github.luhuec.playloggingui.control
 
 GET      /playloggingui/logger           com.github.luhuec.playloggingui.controllers.LoggerController.loggers
 GET      /playloggingui/logger/update    com.github.luhuec.playloggingui.controllers.LoggerController.updateLogger(logger: String, level: String)
-
-GET      /playloggingui/assets/js        com.github.luhuec.playloggingui.controllers.AssetsController.js()

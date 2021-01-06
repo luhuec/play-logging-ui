@@ -10,7 +10,7 @@ scmInfo := Some(
 developers := List(Developer("luhuec", "luhuec", "lh@luhuec.de", url("https://github.com/luhuec")))
 licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0"))
 publishMavenStyle := true
-version := "0.0.5-SNAPSHOT"
+version := "0.0.5"
 
 crossPaths := false
 
