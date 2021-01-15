@@ -11,9 +11,9 @@
   button {
     box-shadow: none;
     border-radius: 0px;
-    background-color: #ffffff;
     border: none;
-    padding: 15px 10px;
+    background-color: rgba(1, 1, 1, 0.0);
+    padding: 10px 10px;
     font-size: 0.8rem;
 
     &:hover {

@@ -25,6 +25,9 @@
 </script>
 
 <style lang="scss">
+    div {
+      background-color: #f1f2f6;
+    }
 </style>
 
 <div>

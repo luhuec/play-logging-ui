@@ -82,33 +82,43 @@
         background-color: #f6f6f6;
       }
 
-      .name {
-        .highlight {
-          background-color: lighten(#fbc687, 10%);
+      .info-container {
+        flex-grow: 1;
+
+        .name {
+          .highlight {
+            background-color: lighten(#fbc687, 10%);
+          }
+
+          &.toplevel {
+            font-size: 1rem;
+            font-weight: bold;
+          }
         }
 
-        &.toplevel {
-          font-size: 1rem;
-          font-weight: bold;
+        .hide-status {
+          font-size: 1.2rem;
+          color: #95a5a6;
         }
-      }
-    }
-
-    .children {
-      .info {
-        border-top: 1px solid #e6e6e6;
       }
     }
   }
 </style>
 
 <div class="logger" class:main={depth == 0}>
-    <div class="info" style="margin-left: {depth * 20}px" on:click={() => hide = !hide}>
-    <span class="name" class:toplevel="{depth == 0}">
-      {#each nameparts as part (part.value)}
-        <span class:highlight={part.highlight}>{part.value}</span>
-      {/each}
-    </span>
+    <div class="info" style="margin-left: {depth * 15}px">
+        <div class="info-container" on:click={() =>  hide = !hide}>
+            {#if logger.children.length}
+                <span class="hide-status">
+                    {#if hide}+{:else}−{/if}
+                </span>
+            {/if}
+            <span class="name" class:toplevel="{depth == 0}">
+              {#each nameparts as part (part.value)}
+                <span class:highlight={part.highlight}>{part.value}</span>
+              {/each}
+            </span>
+        </div>
         <div class="levels">
             <LoggerLevels
                     on:update-log-level={(e) => dispatch('update-log-level', new UpdateLogLevelEvent(logger, e.detail.level))}
@@ -120,7 +130,7 @@
 
         <div class="children">
             {#each logger.children as child (child.name)}
-                <svelte:self on:update-log-level logger={child} depth={depth + 1}/>
+                <svelte:self on:update-log-level logger={child} depth={depth + 1} hide={hide}/>
             {/each}
         </div>
     {/if}
