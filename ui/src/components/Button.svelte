@@ -27,11 +27,11 @@
         background-color: $color;
       }
       &.level-TRACE {
-        $color: #82ccdd;
+        $color: #cdd4db;
         background-color: $color;
       }
       &.level-DEBUG {
-        $color: #60a3bc;
+        $color: #a2b4c3;
         background-color: $color;
       }
       &.level-INFO {
