@@ -2,9 +2,9 @@ package com.github.luhuec.playloggingui.service
 
 import cats.implicits._
 import ch.qos.logback.classic.{Level, LoggerContext}
-import javax.inject.{Inject, Singleton}
 import org.slf4j.LoggerFactory
 
+import javax.inject.{Inject, Singleton}
 import scala.collection.JavaConverters._
 
 sealed trait Error
@@ -54,7 +54,7 @@ class LoggerService @Inject() (repo: LoggerRepo) {
 
   private def readLevel(level: String): Either[Error, Level] = {
     level.toUpperCase match {
-      case "OFF" | "DEBUG" | "INFO" | "WARN" | "ERROR" =>
+      case "OFF" | "TRACE" | "DEBUG" | "INFO" | "WARN" | "ERROR" =>
         Right(Level.toLevel(level.toUpperCase, Level.INFO))
       case _ => Left(LevelNotFound(level))
     }

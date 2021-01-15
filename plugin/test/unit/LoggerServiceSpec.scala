@@ -12,9 +12,11 @@ class LoggerServiceSpec extends WordSpec with IdiomaticMockito with EitherValues
   "LoggerService" must {
 
     "update the log level of a logger" in new Fixture with SomeLoggers {
-      classicLogger("play").getEffectiveLevel must not be Level.WARN
-      service.updateLoglevel("play", "warn").right.value mustBe a[Unit]
-      classicLogger("play").getEffectiveLevel mustBe Level.WARN
+      List("off", "trace", "debug", "info", "warn", "error") foreach { level =>
+        classicLogger("play").getEffectiveLevel must not be Level.toLevel(level)
+        service.updateLoglevel("play", level).right.value mustBe a[Unit]
+        classicLogger("play").getEffectiveLevel mustBe Level.toLevel(level)
+      }
     }
 
     "update the log level of a logger and it's children" in new Fixture with SomeLoggers {

@@ -12,6 +12,7 @@
 
   const allLevels: Array<LogLevelInfo> = [
     new LogLevelInfo("OFF"),
+    new LogLevelInfo("TRACE"),
     new LogLevelInfo("DEBUG"),
     new LogLevelInfo("INFO"),
     new LogLevelInfo("WARN"),
