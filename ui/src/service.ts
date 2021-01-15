@@ -2,6 +2,7 @@ import { fetchLoggers } from "./api";
 
 export class LoggerModel {
     name: string;
+    shortName: string;
     level: string;
     children: Array<LoggerModel>
 

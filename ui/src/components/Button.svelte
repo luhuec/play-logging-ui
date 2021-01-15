@@ -10,11 +10,11 @@
 <style lang="scss">
   button {
     box-shadow: none;
-    border-radius: 5px;
-    background-color: #ffffff00;
+    border-radius: 0px;
+    background-color: #ffffff;
     border: none;
-    padding: 5px 10px;
-    margin-left: 5px;
+    padding: 15px 10px;
+    font-size: 0.8rem;
 
     &:hover {
       cursor: pointer;
