@@ -23,6 +23,19 @@ libraryDependencies ++= Seq(
   "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.3"  % Test
 )
 
+// mark all play libraries as 'provided'
+libraryDependencies := libraryDependencies.value.map { module =>
+  if (module.organization == "com.typesafe.play" && module.configurations.isEmpty) {
+    if (module.name.startsWith("play") || module.name == "filters-helpers") {
+      module % Provided
+    } else {
+      module
+    }
+  } else {
+    module
+  }
+}
+
 publishTo := Some(
   if (isSnapshot.value)
     Opts.resolver.sonatypeSnapshots
