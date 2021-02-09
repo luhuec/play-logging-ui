@@ -4,6 +4,7 @@
     import {loggerStore, queryStore} from "./stores";
     import {updateLogLevel} from "./api";
     import Header from "./components/Header.svelte";
+    import Loader from "./components/Loader.svelte";
     import Error from "./components/Error.svelte";
 
     export let basepath: string;
@@ -69,7 +70,11 @@
     <Error/>
     <Header/>
 
-    {#each loggers as logger (logger.name)}
-        <Logger on:update-log-level={onUpdateLogLevel} {logger} depth={0}/>
-    {/each}
+    {#if loggers.length > 0}
+        {#each loggers as logger (logger.name)}
+            <Logger on:update-log-level={onUpdateLogLevel} {logger} depth={0}/>
+        {/each}
+    {:else}
+        <Loader />
+    {/if}
 </div>

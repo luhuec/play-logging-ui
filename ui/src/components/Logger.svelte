@@ -73,17 +73,20 @@
     }
 
     .info {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
+      display: grid;
+      grid-template-columns: auto 335px;
+      column-gap: 10px;
 
       &:hover {
         background-color: #f6f6f6;
+        cursor: pointer;
       }
 
       .info-container {
-        flex-grow: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-top: 5px;
 
         .name {
           .highlight {
@@ -99,6 +102,10 @@
         .hide-status {
           font-size: 1.2rem;
           color: #95a5a6;
+
+          &.hide {
+            opacity: 0;
+          }
         }
       }
     }
@@ -108,12 +115,10 @@
 <div class="logger" class:main={depth == 0}>
     <div class="info" style="margin-left: {depth * 15}px">
         <div class="info-container" on:click={() =>  hide = !hide}>
-            {#if logger.children.length}
-                <span class="hide-status">
+                <span class="hide-status" class:hide={logger.children.length == 0}>
                     {#if hide}+{:else}−{/if}
                 </span>
-            {/if}
-            <span class="name" class:toplevel="{depth == 0}">
+            <span class="name" class:toplevel="{depth == 0}" title="{logger.name}">
               {#each nameparts as part (part.value)}
                 <span class:highlight={part.highlight}>{part.value}</span>
               {/each}
