@@ -22,7 +22,7 @@ class LoggerController @Inject() (
     Action.async { request =>
       Future {
         val basepath = request.path.split("/playloggingui").headOption.getOrElse("")
-        val js = environment.resourceAsStream("/assets/main.79db02bbea437624490e.js").map { is =>
+        val js = environment.resourceAsStream("/assets/main.94e5c746ae60671dac92.js").map { is =>
           Html(Source.fromInputStream(is).mkString)
         } getOrElse (throw new Exception("Could not load js"))
         Ok(com.github.luhuec.playloggingui.views.html.index(basepath, js))

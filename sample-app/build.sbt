@@ -6,6 +6,6 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 scalaVersion := "2.12.8"
 
 libraryDependencies ++= Seq(
-  "com.github.luhuec" % "play-logging-ui" % "0.0.5",
+  "com.github.luhuec" % "play-logging-ui" % "0.0.6",
   guice
 )
