@@ -1,12 +1,14 @@
 package com.github.luhuec.playloggingui.controllers
 
 import com.github.luhuec.playloggingui.service.{LevelNotFound, LoggerNotFound, LoggerService}
+
 import javax.inject.{Inject, Singleton}
 import play.api.Environment
 import play.api.libs.json.Json
 import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents}
 import play.twirl.api.Html
 
+import java.nio.charset.StandardCharsets
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.io.Source
@@ -23,7 +25,7 @@ class LoggerController @Inject() (
       Future {
         val basepath = request.path.split("/playloggingui").headOption.getOrElse("")
         val js = environment.resourceAsStream("playloggingui/assets/main.js").map { is =>
-          Html(Source.fromInputStream(is).mkString)
+          Html(Source.fromInputStream(is, StandardCharsets.UTF_8.name()).mkString)
         } getOrElse (throw new Exception("Could not load js"))
         Ok(com.github.luhuec.playloggingui.views.html.index(basepath, js))
       }
