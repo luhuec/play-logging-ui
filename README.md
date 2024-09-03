@@ -29,4 +29,3 @@ You can import the routes with a basepath such as `/admin`
 ```
 
 Now the UI is available under `http://localhost:9000/admin/playloggingui`
-
